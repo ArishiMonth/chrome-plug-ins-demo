@@ -1,0 +1,32 @@
+{
+"name": "My First Extension",
+"version": "1.0",
+"description": "The first extension that I made.",
+ "manifest_version": 2,
+"browser_action": {
+  "default_icon":"icon.png",
+  "default_popup": "popup.html"
+},
+  "background":
+    {
+        // 2种指定方式，如果指定JS，那么会自动生成一个背景页
+        //"page": "background1.html",
+        "scripts": ["js/background.js"]
+		
+    },
+ "content_scripts": [
+        {
+            //"matches": ["http://*/*", "https://*/*"],
+            // "<all_urls>" 表示匹配所有地址
+            "matches": ["http://truck.gghypt.net/carApp/home.jsp?carapp"],
+            // 多个JS按顺序注入
+            "js": ["js/content-script.js"],
+            "run_at": "document_end"
+        }
+    ],
+"web_accessible_resources": ["js/inject.js"],
+"permissions": [
+"contextMenus",
+ "tabs"
+]
+}
